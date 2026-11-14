@@ -1,0 +1,82 @@
+The new operator allocates memory for a single object and returns a pointer to the allocated memory.
+Syntax
+pointer = new data_type;
+or with initialization
+pointer = new data_type(value);
+
+Allocating Arrays Using new -- The new operator can also allocate memory for arrays whose size is determined during runtime.
+Syntax  pointer = new data_type[size];
+
+#include <iostream>
+#include <memory>
+using namespace std;
+int main() {
+    // Write C++ code here
+
+    int *nptr; //declared a pointer to store address of allocated memory
+    nptr=new int(6); // allocates memory for an int and initializes it with 6
+    cout<<*nptr<<endl;
+    cout<<nptr;
+
+    int *ptr2;
+    ptr2=new int[4]{4,6,8,6}; //allocates mem for 5 int.
+    //array is initialized during allocation here
+
+int i;
+    for(i=0;i<5;i++)
+        {
+            cout<<ptr2[i]<<" ";
+        }   
+    
+}
+Handling Allocation Failure ====
+use the nothrow version of new, which returns nullptr on failure.
+Syntax
+
+For a single object
+delete ptr;
+For an array
+delete[] arr;
+#include <iostream>
+#include <memory>
+using namespace std;
+int main() {
+    // Write C++ code here
+   int  *ptr=new (nothrow)int;
+    if(ptr==nullptr)
+    {
+        cout<<"memory allocation failed"<<endl;
+    }
+    delete ptr;  
+    
+}
+
+#include <iostream>
+#include <memory>
+using namespace std;
+int main() {
+    // Write C++ code here
+
+   int *ptr=NULL;
+
+    ptr=new int(10);
+
+    if(!ptr)
+    {
+        cout<<"mem allocation failed"<<endl;
+
+        
+    }
+    else
+    {
+    cout<<*ptr<<endl;        
+    }
+    delete ptr;  //free thr value once its used
+
+    ptr=new int[3];
+
+    
+    
+    
+    
+}
