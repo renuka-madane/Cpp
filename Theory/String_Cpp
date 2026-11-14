@@ -1,0 +1,53 @@
+getline (string) in C++
+
+Syntax
+The std::getline() function is defined inside <string> header file in C++.
+
+getline(stream, str, delim);
+
+Parameters 
+
+stream: Input stream from where characters are read.
+str: String where the input is stored after being read from the stream.
+delim(optional): Delimiter is a character where getline stop to read the data. By default, newline character '\n' is the delimiter.
+
+...............CODE
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    // Write C++ code here
+    string str;
+    getline(cin,str);
+    cout<<str;   
+}
+output ====renuka  madane
+renuka  madane
+
+===============
+In C++, we have character array and std::string class both of which are used to store the sequence of characters.
+The character arrays are a part of C-style programming on the other hand std::string is a part of the C++ standard library.
+char charArrayName[size]; 
+The std::string is a class in C++ which is a part of STL (standard template library) and used to store sequence of characters.
+Syntax
+string stringName = " "
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+            char name[]="Renuka Madane";
+
+    cout<<name<<endl;
+
+    string name1="renuka ";
+    name1+="Sagar";
+
+    cout<<name1<<endl;
+   cout<<"lenght of the string--"<<name1.length()<<endl;
+}
+Renuka Madane
+renuka Sagar
+lenght of the string--12
