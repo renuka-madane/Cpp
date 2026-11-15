@@ -73,10 +73,88 @@ int main() {
     }
     delete ptr;  //free thr value once its used
 
+    ptr=new int[3];   
+    
+}
+==============
+#include <iostream>
+#include <memory>
+using namespace std;
+int main() {
+    // Write C++ code here
+
+   int *ptr=NULL; //dec a pointer to store add of allocated memory
+
+    //req mem for int var using new pointer
+    ptr=new int(55); // alloca and init memory
+
+    if(!ptr)
+    {
+        cout<<"allocation of mem failed";
+    }
+
+    cout<<"value of the pointer"<<" "<< *ptr<<endl;
+
+    delete ptr; // free the value once its used
+
+    //allocate mem to an array
     ptr=new int[3];
 
-    
-    
-    
-    
+    ptr[0]=33;
+    ptr[1]=34;
+    ptr[2]=66;  
+    //alloc. an array
+    cout<<"Array"<<endl;
+    int i;
+    for(i=0;i<3;i++)
+        {
+            cout<<ptr[i]<<endl;
+        }
+        //dealloc when done
+    delete[] ptr;
+    int *name=new int(69);
+    delete name;
+    name=nullptr; //set the pointer to nullptr after deletion
+    cout<<*name<<endl;        
+}
+
+#include <iostream>
+#include <memory>
+using namespace std;
+int main() {
+    // Write C++ code here
+
+   int *ptr=NULL; //dec a pointer to store add of allocated memory
+
+    //req mem for int var using new pointer
+    ptr=new int(55); // alloca and init memory
+
+    if(!ptr)
+    {
+        cout<<"allocation of mem failed";
+    }
+
+    cout<<"value of the pointer"<<" "<< *ptr<<endl;
+
+    delete ptr; // free the value once its used
+
+    //allocate mem to an array
+    ptr=new int[3];
+
+    ptr[0]=33;
+    ptr[1]=34;
+    ptr[2]=66;  
+    //alloc. an array
+    cout<<"Array"<<endl;
+    int i;
+    for(i=0;i<3;i++)
+        {
+            cout<<ptr[i]<<endl;
+        }
+        //dealloc when done
+    delete[] ptr;
+    int *name=new int(69);
+    delete name;
+    name=nullptr; //set the pointer to nullptr after deletion
+    cout<<*name<<endl;        
 }
