@@ -1,0 +1,80 @@
+==============Maximum in an Array
+The find_max function takes the array and its size, initializes ans with the first element, and checks elements starting from the second one.
+It compares each element with ans and updates it whenever a larger value is found.
+The function returns ans as the maximum element of the array.
+The main function inputs the array size and elements, calls find_max, and displays the result.
+#include <iostream>
+using namespace std;
+
+int find_max(int arr[],int n)
+{
+    int max=arr[0];
+    int i;
+    for(i=1;i<n;i++)
+    {
+        if(arr[i]>max)
+        {
+            max=arr[i];
+        }
+    }
+    return max;    
+        
+}
+int main() {
+    // Write C++ code here
+    int num;
+    cin>>num;
+    int arr[num];
+
+    for(int i=0;i<num;i++)
+        {
+            cin>>arr[i];
+        }
+
+    cout<<find_max(arr,num);
+}
+
+===================CHECK SORTED ARRAY
+#include <iostream>
+using namespace std;
+
+int isSorted(int arr[],int n)
+{
+    
+    if(n==1)
+    {
+        return true;
+    }
+    else
+    {
+        for(int i=0;i<(n-1);i++)
+            {
+                if(arr[i]>arr[i+1])
+                {
+                    return false;
+                }
+            }
+        return true;
+    }           
+}
+int main() {
+    // Write C++ code here
+    int num;
+    cin>>num;
+    int arr[num];
+
+    for(int i=0;i<num;i++)
+        {
+            cin>>arr[i];
+        }
+    int result=isSorted(arr,num);
+    if(result)
+    {
+        cout<<("Is sorted");
+    }
+    else
+    {
+        cout<<"not sorted";
+    }
+    
+}
