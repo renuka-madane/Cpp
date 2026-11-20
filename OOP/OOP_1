@@ -1,0 +1,268 @@
+Class and Class Members t is a user-defined data-type which contains data members carrying values that
+describe the characteristics of the entity the class represents,
+When a class is instantiated, an object is created which is provided a memory/storage location.
+
+Data Members are the identifiers that describe the characteristics and hold important data related to the class.
+ Anything that can hold data value can be a data-member.
+Member Functions/Methods are class-functions/methods which describe the behavior of the class. 
+i.e. what kind of operation we can perform with objects of this class.
+n C++ can be defined inside/outside the class, however, it is mandatory to have prototype declaration
+inside the class if go for an outside-the-class definition.
+
+
+
+CODE--==========
+// Online C++ compiler (editor)
+// Write and run C++ online using this editor.
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+class Employee{
+    public:
+        string id,name;
+        int years;    
+        Employee(string id,string name,int years){
+            this->id=id;
+            this->name=name;
+            this->years=years;        
+        }
+        
+        void work() ;// work is a member function , here prototype dec. is done
+            
+};
+void Employee::work()
+    {
+        cout<<"employee "<<this->id<<"is working";
+    };
+int main() {
+    // Write C++ code here
+    //class instantiation direct
+    
+    Employee emp("GFG123", "John", 3);
+
+    cout<<emp.id<<" "<<emp.name<<" "<<emp.years<<endl;
+     //class instantiation in-direct
+
+    emp.work();
+    Employee *emp_ptr=new Employee("88","Madane",6);
+    cout<<emp_ptr->id<<" "<<emp_ptr->name<<" "<<emp_ptr->years<<endl;
+    return 0;
+}
+
+GFG123 John 3
+employee GFG123is working88 Madane 6
+
+==============
+Members of a class are private by default and members of a struct are public by default.
+// Online C++ compiler (editor)
+// Write and run C++ online using this editor.
+
+#include <iostream>
+using namespace std;
+struct example1{
+    int x; //x is public
+};
+
+class example2{
+    int x; //x is private
+};
+int main() {
+    // Write C++ code here
+    example1 ex1;
+    example2 ex2;
+
+    cout<<ex1.x<<" "<<endl;
+    cout<<ex2.x<<" "<<endl;
+    
+    return 0;
+}
+/tmp/vMv2JeTB5L-YDCgqDeM/main.cpp: In function 'int main()':
+/tmp/vMv2JeTB5L-YDCgqDeM/main.cpp:19:15: error: 'int example2::x' is private within this context
+   19 |     cout<<ex2.x<<" "<<endl;
+      |               ^
+/tmp/vMv2JeTB5L-YDCgqDeM/main.cpp:11:9: note: declared private here
+   11 |     int x; //x is private
+      |         ^
+generates compilation-error because we tried to access data-member x for instance b (which is private).
+
+.............When deriving a struct from a class/struct, default access-specifier for a base class/struct is public.
+And when deriving a class, the default access specifier is private.
+
+==============code 1
+// Online C++ compiler (editor)
+// Write and run C++ online using this editor.
+
+#include <iostream>
+using namespace std;
+class base{
+
+    public:
+        int x; //x is public
+};
+
+class derived1:base{
+    public:
+    int x;
+    
+};
+
+struct derived2:base{
+    
+};
+int main() {
+    // Write C++ code here
+
+   derived1 var1;
+    derived2 var2;
+
+    cout<<var1.x<<" "<<endl;
+    cout<<var2.x<<" "<<endl;
+    return 0;
+}
+0 
+0 
+code 2===========
+// Online C++ compiler (editor)
+// Write and run C++ online using this editor.
+
+#include <iostream>
+using namespace std;
+class base{
+
+    public:
+        int x; //x is public
+};
+
+class derived1:base{
+        
+};
+
+struct derived2:base{
+    
+};
+int main() {
+    // Write C++ code here
+
+   derived1 var1;
+    derived2 var2;
+
+    cout<<var1.x<<" "<<endl;
+    cout<<var2.x<<" "<<endl;
+    return 0;
+}
+
+=============
+// Online C++ compiler (editor)
+// Write and run C++ online using this editor.
+
+#include <iostream>
+using namespace std;
+
+class Point{
+    private:
+        int x,y;
+    public:
+    Point()
+        {
+            x=y=0;
+        }
+
+    Point(int x1,int y1)
+    {
+        x=x1;
+        y=y1;        
+    }
+void print()
+    {
+        cout<<x<<" "<<y<<endl;
+    }
+    
+};
+int main() {
+    // Write C++ code here
+   Point p1,p2(55,88);
+
+    p1.print();
+    p2.print();
+    
+    return 0;
+}
+0 0
+55 88
+
+=========== Member Initialization Order
+Code Example 3: Constructor Initialization without Initializer List
+// Online C++ compiler (editor)
+// Write and run C++ online using this editor.
+
+#include <iostream>
+using namespace std;
+class Test
+{
+    public:
+        Test()
+        {
+            cout<<"default"<<endl;
+            //the default constructor of Test is called first, 
+        }
+
+        Test(int x)
+        {
+            cout<<"parameterized"<<endl;
+            //followed by the parameterized constructor.
+        }
+
+    //The member is initialized twice, leading to performance inefficiencies.
+};
+
+class Main
+{
+    public:
+        Test t; //The Main class contains an object of Test.
+
+
+        Main()
+        {
+            t=Test(105);  //In its constructor, t is assigned a new value.
+        }
+};
+int main() {
+    // Write C++ code here
+    Main m;
+    
+    return 0;
+}
+default
+parameterized
+
+================Constructor with Initializer List
+// Online C++ compiler (editor)
+// Write and run C++ online using this editor.
+
+#include <iostream>
+using namespace std;
+class Test
+{
+    public:
+        Test(int x){
+            cout<<"parameterized"<<x<<endl;
+        }
+};
+
+class Main
+{
+   public:
+    Test t;
+
+    Main():t(10){}; // the Main class uses an initializer list to initialize the Test object t.
+    //The member t is initialized directly, avoiding the overhead of default initialization followed by assignment.
+    
+};
+int main() {
+    // Write C++ code here
+    Main m;
+    
+    return 0;
+}
+parameterized10
