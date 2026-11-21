@@ -1,0 +1,27 @@
+
+#include <iostream>
+using namespace std;
+
+class Point{
+        int a,b;
+public:
+    Point(int a,int b)
+    {
+        this->a=a;
+        this->b=b;
+    }
+
+    void print(){
+
+        cout<<a<<" "<<b<<endl;
+    }
+};
+
+int main() {
+    // Write C++ code here
+Point p1(44,56),p2(98,44);
+    p1.print();
+    p2.print();
+    
+    return 0;
+}
