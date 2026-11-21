@@ -1,0 +1,35 @@
+Static Data Members
+
+#include <iostream>
+using namespace std;
+
+
+class Player{
+    public:
+    static int count; //dec. of static member
+
+    Player(){
+        count++; //inc count when player is created
+    }
+
+    ~Player(){
+        count--; //dec count when player is destroyed
+    }
+    
+};
+
+int Player::count=0; //def of static data member
+
+int main() {
+    // Write C++ code here
+
+    Player p1;
+
+    cout<<Player::count<<endl;
+    Player p2;
+
+    cout<<Player::count<<endl;
+    return 0;
+}
+=====  1
+2
