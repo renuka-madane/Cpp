@@ -1,0 +1,91 @@
+A copy constructor creates a new object by copying an existing object. If not explicitly defined, the compiler generates a default 
+copy constructor, which performs a shallow copy. 
+For dynamic memory, a user-defined copy constructor is necessary to perform a deep copy.
+
+Without the custom copy constructor, the default copy constructor would copy the pointer, 
+leading to a shallow copy where both objects share the same memory.
+The destructor ~Test() ensures that the dynamically allocated memory is released.
+
+#include <iostream>
+using namespace std;
+
+class Test
+{
+    private:
+        int *ptr;
+
+    public:
+        Test(int x){
+            ptr=new int(x);           
+            
+        }
+
+    //copy constructor for deep copy
+    Test(const Test &t)
+    {
+        ptr=new int(*(t.ptr));
+
+        //The copy constructor Test(const Test &t) allocates new memory and copies the value from the original object to avoid shared memory issues.        
+    }
+
+    void set(int x)
+    {
+        *ptr=x;
+    }
+
+    void print(){
+
+        cout<<*ptr<<endl;
+    }
+
+    ~Test()
+    {
+        delete ptr;
+    }
+    
+};
+int main() {
+    // Write C++ code here
+    Test t1(10);
+    Test t2=t1;
+
+    t1.set(10);
+    t2.set(55);
+
+    t1.print();
+    t2.print();
+    return 0;
+}
+OUTPUT== 10
+55
+
+Destructors are special member functions that clean up resources when an object is destroyed. 
+They have the same name as the class, preceded by a tilde (~), and cannot take arguments or return a value.
+
+
+#include <iostream>
+using namespace std;
+
+
+class Test{
+    int var;
+
+    public:
+        Test(int num):var(num)
+    {
+        cout<<"constructor"<<var<<endl;
+    }
+    ~Test(){
+        cout<<"destructor"<<var<<endl;
+    }
+
+    
+};
+int main() {
+    // Write C++ code here
+
+   Test t1(10);
+    Test t2(58);
+    return 0;
+}
+The destructor is called in reverse order of creation when the program exits.
