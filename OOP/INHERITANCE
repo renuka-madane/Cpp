@@ -1,0 +1,55 @@
+CODES========
+#include <iostream>
+using namespace std;
+
+class Person{ //base class Person
+    protected:
+        string name; //contains common attributes like name and id
+        int id; //protected because they are accessible 
+
+    public:
+        Person(string n,int i):name{n},id(i){};   
+    
+};
+
+//Student class inherits from Person using public access specifier.
+class Student:protected Person{ //derived class strudent inherits name and id from Person
+    private:
+        int marks; // adds new attribute marks
+
+    public:
+        Student(string n,int i,int m):Person(n , i),marks(m){}; 
+
+    void print(){ //method print to display details
+        cout<<name<<" "<<id<<" "<<marks<<endl;
+    }
+    
+};
+//name and id are marked as protected in Person,
+//allowing Student to access them directly.
+int main() {
+    // Write C++ code here
+    Student info("Renuka",55,91);
+    info.print();
+    
+    return 0;
+}
+
+if made private:
+        int x;
+x is private in the Base class and cannot be accessed in the Derived class.
+The program results in a compiler error when trying to access x.
+
+if made--
+ cout<<d.x<<endl;
+Base
+Derived 
+55 88
+55
+
+if made---
+  protected:
+        int x;
+
+error-- note: declared protected here
+    9 |         int x;
