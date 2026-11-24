@@ -53,3 +53,175 @@ if made---
 
 error-- note: declared protected here
     9 |         int x;
+============
+class C inherits from both class A and class B. When an object of C is created, it will have access to the members of both A and B.
+
+#include <iostream>
+
+class A{
+    //attributes and methods for class A
+};
+ class B{
+    //Attributes and methods for class B
+ };
+class C:public A,public B{
+    //class C inherits from both A and B
+};
+int main() {
+    // Write C++ code here
+    C obj; //object of class C
+    
+    return 0;
+}
+....................
+
+When an object of a derived class is created, the constructors of its base classes are called 
+in the order in which they are specified in the inheritance list. 
+#include <iostream>
+using namespace std;
+class A{
+    //attributes and methods for class A
+    public:
+
+    A(){
+        cout<<"A's construcotr is called..."<<endl;
+    }
+};
+ class B{
+    //Attributes and methods for class B
+     public:
+     
+     B(){
+          cout<<"B's construcotr is called"<<endl;
+     }
+ };
+class C:public A,public B{
+    //class C inherits from both A and B
+    public:    
+        C(){
+            cout<<"C's construcotr is called"<<endl;
+        }
+};
+int main() {
+    // Write C++ code here
+    C obj; //object of class C
+    
+    return 0;
+}
+
+A's construcotr is called...
+B's construcotr is called
+C's construcotr is called
+............
+If we change the order in the inheritance list (e.g., class C : public B, public A), the constructors will be called in that new order.
+#include <iostream>
+using namespace std;
+class A{
+    //attributes and methods for class A
+    public:
+
+    A(){
+        cout<<"A's construcotr is called..."<<endl;
+    }
+};
+ class B{
+    //Attributes and methods for class B
+     public:
+     
+     B(){
+          cout<<"B's construcotr is called"<<endl;
+     }
+ };
+class C:public B,public A{
+    //class C inherits from both A and B
+    public:    
+        C(){
+            cout<<"C's construcotr is called"<<endl;
+        }
+};
+int main() {
+    // Write C++ code here
+    C obj; //object of class C
+    
+    return 0;
+}
+B's construcotr is called
+A's construcotr is called...
+C's construcotr is called
+
+===============The Diamond Problem
+The Diamond Problem arises in multiple inheritance when a class inherits from two classes that both inherit from a common base class. 
+This leads to ambiguity because the members of the common base class are inherited twice.
+
+Diamond Problem code-->>
+ class D inherits from both class B and class C, and both of these inherit from class A. This means that class D contains two copies of A's 
+members (e.g., x). When we try to access x in main(), the compiler throws an ambiguity error because it
+cannot determine which x to use: the one inherited through B or the one inherited through C.
+
+#include <iostream>
+using namespace std;
+
+class A{
+    public:
+        int x;
+    A(){
+        int x=44;
+    }    
+    
+};
+
+class B:public A{
+    //inherits from class A
+};
+
+class C:public A{
+    //inherits from class A
+};
+
+class D:public B,public C{
+//class D inherits from both class B and C
+    //class D contains 2 copies of A's members x
+};
+int main() {
+    // Write C++ code here
+    D obj;
+    cout<<obj.x<<" "<<endl;
+    
+    return 0;
+}
+OUTPUT-- request for member 'x' is ambiguous
+   31 |     cout<<obj.x<<" "<<endl;
+============
+#include <iostream>
+using namespace std;
+
+class A{
+    public:int x;
+    A(){x=896;}      
+};
+
+class B:virtual public A{
+    //inherits from class A
+};
+
+class C:virtual public A{
+    //inherits from class A
+};
+
+class D : public B,public C {};
+//class D inherits from both class B and C
+    //class D contains 2 copies of A's members x
+//To resolve the Diamond Problem, C++ provides the virtual keyword. When a class is inherited virtually, only one copy of the
+//base class's members is shared across all derived classes.
+int main() {
+    // Write C++ code here
+    D obj;
+    cout<<obj.x<<" "<<endl;    
+    return 0;
+}
+In this code, the virtual keyword ensures that there is only one copy of A's members in class D. When we access obj.x, 
+it is clear which x is being referred to, and the ambiguity is resolved.
+============
+Multiple Inheritance allows a class to inherit from two or more base classes.
+It introduces the Diamond Problem, where ambiguity arises due to multiple copies of the same base class members.
+The virtual keyword resolves this problem by ensuring that only one copy of the base class's members is shared.
