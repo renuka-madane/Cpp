@@ -1,4 +1,7 @@
-
+Virtual functions allow derived classes to override methods in the base class. The key idea is to ensure that the function call
+is determined by the type of the object being pointed to rather than the type of the pointer or reference.
+This concept is tightly linked to inheritance, where a base class type can refer to a derived class object. 
+Without virtual functions, the method call is resolved based on the pointer's type, not the object it points to.
 
 #include <iostream>
 using namespace std;
